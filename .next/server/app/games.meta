@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/games/layout,_N_T_/games/page,_N_T_/games"
+  },
+  "routeCache": {
+    "key": "/route-cache/APP_PAGE/4aefd5d0ef82ab10e8461241128973acff26e922d8834b3d96ffd8158dd36b09/$/games",
+    "owner": {
+      "kind": "APP_PAGE",
+      "sourceRoute": "/games/page"
+    },
+    "isFallback": false
+  }
+}
