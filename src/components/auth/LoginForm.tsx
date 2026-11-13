@@ -60,15 +60,21 @@ export function LoginForm() {
         isBlocked: res.player.isBlocked,
       };
 
+      if (!res.refreshToken) {
+        setError("Login response missing refresh token. Update the API.");
+        return;
+      }
       dispatch(
         setCredentials({
           accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
           player,
           remember,
         }),
       );
       saveAuthSession({
         accessToken: res.accessToken,
+        refreshToken: res.refreshToken,
         player,
         remember,
       });

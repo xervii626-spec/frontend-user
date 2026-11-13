@@ -365,6 +365,21 @@ function PlayView() {
         //TURBOPACK unreachable
         ;
     }, []);
+    // Keep address bar in sync when Fun/Real is toggled (was stuck on mode=fun)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (!gameId) return;
+        const params = new URLSearchParams(search.toString());
+        if (params.get("mode") === mode) return;
+        params.set("mode", mode);
+        router.replace(`/play?${params.toString()}`, {
+            scroll: false
+        });
+    }, [
+        mode,
+        gameId,
+        router,
+        search
+    ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const idNum = Number(gameId);
         if (!gameId || Number.isNaN(idNum) || idNum < 1) {
@@ -412,7 +427,7 @@ function PlayView() {
                                 children: title
                             }, void 0, false, {
                                 fileName: "[project]/src/app/play/page.tsx",
-                                lineNumber: 85,
+                                lineNumber: 94,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -425,13 +440,13 @@ function PlayView() {
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/play/page.tsx",
-                                lineNumber: 86,
+                                lineNumber: 95,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/play/page.tsx",
-                        lineNumber: 84,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -445,7 +460,7 @@ function PlayView() {
                                         children: "Balance "
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/play/page.tsx",
-                                        lineNumber: 93,
+                                        lineNumber: 102,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -456,7 +471,7 @@ function PlayView() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/play/page.tsx",
-                                        lineNumber: 94,
+                                        lineNumber: 103,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -464,7 +479,7 @@ function PlayView() {
                                         children: "="
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/play/page.tsx",
-                                        lineNumber: 97,
+                                        lineNumber: 106,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -475,13 +490,13 @@ function PlayView() {
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/play/page.tsx",
-                                        lineNumber: 98,
+                                        lineNumber: 107,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/play/page.tsx",
-                                lineNumber: 92,
+                                lineNumber: 101,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -493,7 +508,7 @@ function PlayView() {
                                         label: "Fun"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/play/page.tsx",
-                                        lineNumber: 104,
+                                        lineNumber: 113,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(ModeBtn, {
@@ -502,13 +517,13 @@ function PlayView() {
                                         label: "Real"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/play/page.tsx",
-                                        lineNumber: 109,
+                                        lineNumber: 118,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/play/page.tsx",
-                                lineNumber: 103,
+                                lineNumber: 112,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -517,7 +532,7 @@ function PlayView() {
                                 children: "Lobby"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/play/page.tsx",
-                                lineNumber: 116,
+                                lineNumber: 125,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -527,19 +542,19 @@ function PlayView() {
                                 children: "Log out"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/play/page.tsx",
-                                lineNumber: 122,
+                                lineNumber: 131,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/play/page.tsx",
-                        lineNumber: 91,
+                        lineNumber: 100,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/play/page.tsx",
-                lineNumber: 83,
+                lineNumber: 92,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -552,7 +567,7 @@ function PlayView() {
                             children: error
                         }, void 0, false, {
                             fileName: "[project]/src/app/play/page.tsx",
-                            lineNumber: 135,
+                            lineNumber: 144,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -560,7 +575,7 @@ function PlayView() {
                             children: "If the game UI opens but bets fail, Provider wallet callback may still need registration."
                         }, void 0, false, {
                             fileName: "[project]/src/app/play/page.tsx",
-                            lineNumber: 136,
+                            lineNumber: 145,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -570,19 +585,19 @@ function PlayView() {
                             children: "Back to Games"
                         }, void 0, false, {
                             fileName: "[project]/src/app/play/page.tsx",
-                            lineNumber: 140,
+                            lineNumber: 149,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/play/page.tsx",
-                    lineNumber: 134,
+                    lineNumber: 143,
                     columnNumber: 11
                 }, this) : isLoading || !launchUrl ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(PlayShell, {
                     message: "Launching game…"
                 }, void 0, false, {
                     fileName: "[project]/src/app/play/page.tsx",
-                    lineNumber: 149,
+                    lineNumber: 158,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("iframe", {
                     title: title,
@@ -592,18 +607,18 @@ function PlayView() {
                     referrerPolicy: "no-referrer-when-downgrade"
                 }, void 0, false, {
                     fileName: "[project]/src/app/play/page.tsx",
-                    lineNumber: 151,
+                    lineNumber: 160,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/play/page.tsx",
-                lineNumber: 132,
+                lineNumber: 141,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/play/page.tsx",
-        lineNumber: 82,
+        lineNumber: 91,
         columnNumber: 5
     }, this);
 }
@@ -615,7 +630,7 @@ function ModeBtn({ active, onClick, label }) {
         children: label
     }, void 0, false, {
         fileName: "[project]/src/app/play/page.tsx",
-        lineNumber: 174,
+        lineNumber: 183,
         columnNumber: 5
     }, this);
 }
@@ -625,7 +640,7 @@ function PlayShell({ message }) {
         children: message
     }, void 0, false, {
         fileName: "[project]/src/app/play/page.tsx",
-        lineNumber: 190,
+        lineNumber: 199,
         columnNumber: 5
     }, this);
 }

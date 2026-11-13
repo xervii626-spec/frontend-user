@@ -3,6 +3,7 @@ import type { StoredPlayer } from "@/lib/auth-storage";
 
 export type AuthState = {
   accessToken: string | null;
+  refreshToken: string | null;
   player: StoredPlayer | null;
   remember: boolean;
   hydrated: boolean;
@@ -10,6 +11,7 @@ export type AuthState = {
 
 const initialState: AuthState = {
   accessToken: null,
+  refreshToken: null,
   player: null,
   remember: true,
   hydrated: false,
@@ -23,36 +25,48 @@ const authSlice = createSlice({
       state,
       action: PayloadAction<{
         accessToken: string;
+        refreshToken: string;
         player: StoredPlayer;
         remember: boolean;
       }>,
     ) {
       state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
       state.player = action.payload.player;
       state.remember = action.payload.remember;
       state.hydrated = true;
+    },
+    setTokens(
+      state,
+      action: PayloadAction<{ accessToken: string; refreshToken: string }>,
+    ) {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
     hydrateAuth(
       state,
       action: PayloadAction<{
         accessToken: string | null;
+        refreshToken: string | null;
         player: StoredPlayer | null;
         remember: boolean;
       }>,
     ) {
       state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
       state.player = action.payload.player;
       state.remember = action.payload.remember;
       state.hydrated = true;
     },
     clearCredentials(state) {
       state.accessToken = null;
+      state.refreshToken = null;
       state.player = null;
       state.hydrated = true;
     },
   },
 });
 
-export const { setCredentials, hydrateAuth, clearCredentials } =
+export const { setCredentials, setTokens, hydrateAuth, clearCredentials } =
   authSlice.actions;
 export default authSlice.reducer;

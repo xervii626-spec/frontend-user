@@ -46,6 +46,15 @@ function PlayView() {
     return window.location.origin;
   }, []);
 
+  // Keep address bar in sync when Fun/Real is toggled (was stuck on mode=fun)
+  useEffect(() => {
+    if (!gameId) return;
+    const params = new URLSearchParams(search.toString());
+    if (params.get("mode") === mode) return;
+    params.set("mode", mode);
+    router.replace(`/play?${params.toString()}`, { scroll: false });
+  }, [mode, gameId, router, search]);
+
   useEffect(() => {
     const idNum = Number(gameId);
     if (!gameId || Number.isNaN(idNum) || idNum < 1) {

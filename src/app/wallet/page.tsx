@@ -18,11 +18,16 @@ export default function WalletPage() {
 function WalletView() {
   const onLogout = useLobbyLogout();
   const { data: me } = useMeQuery();
-  const { data: rateData } = useGetRateQuery();
-  const { data: paymentsData, isFetching } = useGetMyPaymentsQuery({
-    page: 1,
-    limit: 20,
+  const { data: rateData } = useGetRateQuery(undefined, {
+    refetchOnMountOrArgChange: true,
   });
+  const { data: paymentsData, isFetching } = useGetMyPaymentsQuery(
+    {
+      page: 1,
+      limit: 20,
+    },
+    { refetchOnMountOrArgChange: true },
+  );
 
   return (
     <div className="min-h-screen w-full bg-[#01100b] text-[#f5efe0]">

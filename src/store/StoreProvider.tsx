@@ -19,10 +19,16 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
         saved
           ? {
               accessToken: saved.accessToken,
+              refreshToken: saved.refreshToken,
               player: saved.player,
               remember: saved.remember,
             }
-          : { accessToken: null, player: null, remember: true },
+          : {
+              accessToken: null,
+              refreshToken: null,
+              player: null,
+              remember: true,
+            },
       ),
     );
   }, []);

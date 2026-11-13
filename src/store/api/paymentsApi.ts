@@ -39,6 +39,8 @@ export const paymentsApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getRate: build.query<RateResponse, void>({
       query: () => "/payments/rate",
+      // No user SSE — refetch when revisiting pages
+      keepUnusedDataFor: 60,
     }),
     getMyPayments: build.query<
       PaymentListResponse,
@@ -52,6 +54,7 @@ export const paymentsApi = baseApi.injectEndpoints({
         },
       }),
       providesTags: ["Wallet"],
+      keepUnusedDataFor: 30,
     }),
     createDeposit: build.mutation<PaymentRequestItem, CreatePaymentBody>({
       query: (body) => ({

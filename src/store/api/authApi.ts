@@ -8,7 +8,9 @@ export type LoginRequest = {
 
 export type LoginResponse = {
   accessToken: string;
+  refreshToken: string;
   expiresAt: string;
+  refreshExpiresAt?: string;
   player: StoredPlayer & {
     gender?: boolean | null;
     wallet?: unknown;
