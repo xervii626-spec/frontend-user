@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLoginMutation } from "@/store/api/authApi";
+import { useGetPublicSettingsQuery } from "@/store/api/settingsApi";
 import { useAppDispatch } from "@/store/hooks";
 import { setCredentials } from "@/store/features/auth/authSlice";
 import { saveAuthSession } from "@/lib/auth-storage";
@@ -28,12 +28,22 @@ export function LoginForm() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [login, { isLoading }] = useLoginMutation();
+  const { data: publicSettings } = useGetPublicSettingsQuery();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [remember, setRemember] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  function onRegisterClick() {
+    const url = publicSettings?.telegramRegisterUrl?.trim();
+    if (!url) {
+      setError("Registration via Telegram is not configured yet.");
+      return;
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 
   const canSubmit = useMemo(
     () => username.trim().length >= 3 && password.length >= 6 && !isLoading,
@@ -215,9 +225,13 @@ export function LoginForm() {
 
       <p className="mt-5 text-center text-[0.85rem] text-[#c5d5cc]">
         New to Shwe Dunn?{" "}
-        <Link href="/register" className="font-semibold text-[#e8c547] hover:underline">
+        <button
+          type="button"
+          onClick={onRegisterClick}
+          className="font-semibold text-[#e8c547] hover:underline"
+        >
           Register Now →
-        </Link>
+        </button>
       </p>
     </div>
   );
