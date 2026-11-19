@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { formatMmk, formatUsd } from "@/lib/money-format";
+import { useShowUsd } from "@/hooks/useShowUsd";
 
 export type NavKey = "games" | "wallet" | "deposit";
 
@@ -27,6 +28,7 @@ export function LobbyHeader({
   onLogout,
 }: LobbyHeaderProps) {
   const [hidden, setHidden] = useState(false);
+  const { showUsd, toggle } = useShowUsd();
   const usd = formatUsd(balanceUsd);
   const mmk = formatMmk(balanceUsd, mmkPerUsd);
 
@@ -78,19 +80,27 @@ export function LobbyHeader({
               <p className="text-[0.58rem] font-semibold tracking-[0.14em] text-[#9a9280]">
                 BALANCE
               </p>
-              <p className="text-[1.05rem] font-bold text-white sm:text-[1.15rem]">
-                {hidden ? "••••" : `${usd} USD`}
-              </p>
-            </div>
-            <span className="text-xl font-light text-[#d4af37]">=</span>
-            <div className="leading-tight">
-              <p className="text-[0.58rem] font-semibold tracking-[0.14em] text-[#9a9280]">
-                MMK
-              </p>
               <p className="text-[1.05rem] font-bold text-[#e8c547] sm:text-[1.15rem]">
-                {hidden ? "••••" : mmk}
+                {hidden ? "••••" : `${mmk} MMK`}
               </p>
+              {showUsd ? (
+                <p className="text-[0.72rem] text-[#9a9280]">
+                  {hidden ? "••••" : `${usd} USD`}
+                </p>
+              ) : null}
             </div>
+            <button
+              type="button"
+              aria-label={showUsd ? "Hide USD" : "Show USD"}
+              onClick={toggle}
+              className={`rounded border px-2 py-1 text-[0.58rem] font-bold tracking-[0.1em] ${
+                showUsd
+                  ? "border-[#d4af37] text-[#e8c547]"
+                  : "border-[#3a3220] text-[#8a8070]"
+              }`}
+            >
+              USD
+            </button>
             <button
               type="button"
               aria-label={hidden ? "Show balance" : "Hide balance"}

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import type { PaymentRequestItem } from "@/store/api/paymentsApi";
 import { formatMmk, formatUsd } from "@/lib/money-format";
+import { useShowUsd } from "@/hooks/useShowUsd";
 
 type Props = {
   balanceUsd: string;
@@ -47,6 +48,7 @@ export function WalletOverview({
   payments,
   loading,
 }: Props) {
+  const { showUsd } = useShowUsd();
   const usd = formatUsd(balanceUsd);
   const mmk = formatMmk(balanceUsd, mmkPerUsd);
   const rate = Number(mmkPerUsd || 0).toLocaleString("en-US");
@@ -69,10 +71,12 @@ export function WalletOverview({
 
       <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
         <SummaryCard title="Available Balance">
-          <p className="text-[1.55rem] font-bold leading-tight text-white sm:text-[1.75rem]">
-            {usd} USD
+          <p className="text-[1.55rem] font-bold leading-tight text-[#e8c547] sm:text-[1.75rem]">
+            {mmk} MMK
           </p>
-          <p className="mt-1 text-[0.95rem] text-[#d4af37]">{mmk} MMK</p>
+          {showUsd ? (
+            <p className="mt-1 text-[0.95rem] text-[#9a9280]">{usd} USD</p>
+          ) : null}
         </SummaryCard>
         <SummaryCard title="Pending Deposits">
           <p className="text-[1.55rem] font-bold leading-tight text-white sm:text-[1.75rem]">

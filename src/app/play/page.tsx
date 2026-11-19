@@ -9,6 +9,7 @@ import { useMeQuery } from "@/store/api/authApi";
 import { useLaunchGameMutation } from "@/store/api/launchApi";
 import { useGetRateQuery } from "@/store/api/paymentsApi";
 import { formatMmk, formatUsd } from "@/lib/money-format";
+import { useShowUsd } from "@/hooks/useShowUsd";
 
 export default function PlayPage() {
   return (
@@ -38,6 +39,7 @@ function PlayView() {
   const [launchUrl, setLaunchUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const { showUsd } = useShowUsd();
   const balanceUsd = me?.balance?.realBalance ?? "0";
   const mmkPerUsd = rateData?.mmkPerUsd ?? "4500";
 
@@ -100,13 +102,17 @@ function PlayView() {
         <div className="flex flex-wrap items-center gap-2">
           <div className="rounded-lg border border-[#d4af37]/40 bg-[#02150f] px-3 py-1.5 text-[0.82rem]">
             <span className="text-[#9a9280]">Balance </span>
-            <span className="font-semibold text-white">
-              {formatUsd(balanceUsd)} USD
-            </span>
-            <span className="mx-1 text-[#d4af37]">=</span>
             <span className="font-semibold text-[#e8c547]">
               {formatMmk(balanceUsd, mmkPerUsd)} MMK
             </span>
+            {showUsd ? (
+              <>
+                <span className="mx-1 text-[#d4af37]">·</span>
+                <span className="font-semibold text-white">
+                  {formatUsd(balanceUsd)} USD
+                </span>
+              </>
+            ) : null}
           </div>
 
           <div className="flex rounded-lg border border-[#d4af37]/35 p-0.5">
