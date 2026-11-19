@@ -9,6 +9,7 @@ import {
   type LobbyCategory,
 } from "@/components/lobby/CategorySearchBar";
 import { GameGrid } from "@/components/lobby/GameGrid";
+import { DailyLoginClaimBox } from "@/components/lobby/DailyLoginClaimBox";
 import { useLobbyLogout } from "@/hooks/useLobbyLogout";
 import { useMeQuery } from "@/store/api/authApi";
 import { useGetGamesQuery, type LobbyGame } from "@/store/api/gamesApi";
@@ -76,6 +77,8 @@ function LobbyPage() {
       />
 
       <main className="w-full px-3 pb-5 pt-4 sm:px-4 lg:px-5">
+        <DailyLoginClaimBox />
+
         <CategorySearchBar
           category={category}
           search={search}
