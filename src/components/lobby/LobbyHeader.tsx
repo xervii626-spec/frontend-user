@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { formatMmk, formatUsd } from "@/lib/money-format";
-import { useShowUsd } from "@/hooks/useShowUsd";
+import { formatMmk } from "@/lib/money-format";
 
 export type NavKey = "games" | "wallet" | "deposit";
 
@@ -28,84 +27,66 @@ export function LobbyHeader({
   onLogout,
 }: LobbyHeaderProps) {
   const [hidden, setHidden] = useState(false);
-  const { showUsd, toggle } = useShowUsd();
-  const usd = formatUsd(balanceUsd);
   const mmk = formatMmk(balanceUsd, mmkPerUsd);
 
   return (
-    <header className="w-full border-b border-[#d4af37]/15 bg-[#01100b]">
-      <div className="relative flex h-[76px] w-full items-center justify-between gap-3 px-3 sm:h-[84px] sm:px-4 lg:px-5">
-        <Link href="/games" className="flex shrink-0 items-center gap-3">
-          <Image
-            src="/brand/lotus-mark.jpg"
-            alt="Shwe Dunn"
-            width={46}
-            height={46}
-            className="rounded-full object-cover"
-            priority
-          />
-          <div className="leading-[1.1]">
-            <p className="font-[family-name:var(--font-cinzel)] text-[1.15rem] font-semibold tracking-[0.12em] text-[#e8c547] sm:text-[1.3rem]">
-              SHWE DUNN
-            </p>
-            <p className="text-[0.62rem] font-medium tracking-[0.16em] text-[#c5bba3] sm:text-[0.68rem]">
-              PLAY RICH • WIN GOLD
-            </p>
-          </div>
+    <header className="w-full border-b border-[#d4af37]/20 bg-[linear-gradient(180deg,#021a12_0%,#01100b_100%)]">
+      <div className="relative flex h-[84px] w-full items-center justify-between gap-3 px-3 sm:h-[96px] sm:px-4 lg:px-5">
+        <Link href="/games" className="flex shrink-0 items-center gap-3 sm:gap-3.5">
+          <span className="relative inline-flex">
+            <span
+              className="absolute inset-0 rounded-full bg-[#d4af37]/30 blur-lg"
+              aria-hidden
+            />
+            <Image
+              src="/brand/sd-logo-circle.jpg"
+              alt="Shwe Dunn"
+              width={64}
+              height={64}
+              className="relative h-14 w-14 rounded-full border-2 border-[#d4af37]/60 object-cover shadow-[0_0_24px_rgba(212,175,55,0.35)] sm:h-16 sm:w-16"
+              priority
+            />
+          </span>
+          <p className="font-[family-name:var(--font-cinzel)] text-[1.35rem] font-semibold tracking-[0.12em] text-[#e8c547] sm:text-[1.7rem] lg:text-[1.85rem]">
+            SHWE DUNN
+          </p>
         </Link>
 
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 md:flex lg:gap-2.5">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 md:flex lg:gap-11">
           {NAV.map((item) => {
             const isActive = item.key === active;
             return (
               <Link
                 key={item.key}
                 href={item.href}
-                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[0.95rem] font-semibold transition lg:px-5 ${
+                className={`relative pb-1.5 font-[family-name:var(--font-cinzel)] text-[1.15rem] font-semibold tracking-[0.06em] transition lg:text-[1.3rem] ${
                   isActive
-                    ? "bg-[#d4af37] text-[#1a1205]"
-                    : "text-white hover:text-[#e8c547]"
+                    ? "text-[#e8c547]"
+                    : "text-[#d8d0bc] hover:text-[#e8c547]"
                 }`}
               >
-                <NavIcon name={item.key} active={isActive} />
                 {item.label}
+                {isActive ? (
+                  <span
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] rounded-full bg-[#d4af37]"
+                    aria-hidden
+                  />
+                ) : null}
               </Link>
             );
           })}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2.5">
-          <div className="flex items-center gap-3 rounded-xl border border-[#d4af37]/50 bg-[#021a12] px-3.5 py-2 sm:gap-3.5 sm:px-4 sm:py-2.5">
-            <div className="leading-tight">
-              <p className="text-[0.58rem] font-semibold tracking-[0.14em] text-[#9a9280]">
-                BALANCE
-              </p>
-              <p className="text-[1.05rem] font-bold text-[#e8c547] sm:text-[1.15rem]">
-                {hidden ? "••••" : `${mmk} MMK`}
-              </p>
-              {showUsd ? (
-                <p className="text-[0.72rem] text-[#9a9280]">
-                  {hidden ? "••••" : `${usd} USD`}
-                </p>
-              ) : null}
-            </div>
-            <button
-              type="button"
-              aria-label={showUsd ? "Hide USD" : "Show USD"}
-              onClick={toggle}
-              className={`rounded border px-2 py-1 text-[0.58rem] font-bold tracking-[0.1em] ${
-                showUsd
-                  ? "border-[#d4af37] text-[#e8c547]"
-                  : "border-[#3a3220] text-[#8a8070]"
-              }`}
-            >
-              USD
-            </button>
+        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          <div className="flex items-center gap-2.5 rounded-full bg-[linear-gradient(180deg,#f0d78c_0%,#d4af37_55%,#b8922a_100%)] px-4 py-2.5 shadow-[0_8px_24px_rgba(212,175,55,0.32)] sm:px-5 sm:py-3">
+            <p className="text-[1.05rem] font-extrabold tabular-nums tracking-wide text-[#1a1205] sm:text-[1.2rem]">
+              {hidden ? "••••" : `${mmk} MMK`}
+            </p>
             <button
               type="button"
               aria-label={hidden ? "Show balance" : "Hide balance"}
               onClick={() => setHidden((v) => !v)}
-              className="text-[#d4af37] hover:text-[#f0d78c]"
+              className="text-[#1a1205]/80 hover:text-[#1a1205]"
             >
               <EyeIcon open={!hidden} />
             </button>
@@ -115,63 +96,67 @@ export function LobbyHeader({
             <button
               type="button"
               onClick={onLogout}
-              className="hidden rounded-xl border border-[#d4af37]/50 px-3.5 py-2.5 text-[0.82rem] font-semibold text-[#e8c547] hover:bg-[#d4af37]/10 sm:inline-flex"
+              className="hidden rounded-full border border-[#d4af37]/45 px-4 py-2.5 text-[0.85rem] font-semibold tracking-[0.06em] text-[#e8c547] transition hover:border-[#d4af37] hover:bg-[#d4af37]/10 sm:inline-flex"
             >
               Log out
             </button>
           ) : null}
         </div>
       </div>
+
+      <nav className="flex items-center justify-center gap-7 border-t border-[#d4af37]/12 px-3 py-3 md:hidden">
+        {NAV.map((item) => {
+          const isActive = item.key === active;
+          return (
+            <Link
+              key={item.key}
+              href={item.href}
+              className={`relative pb-1 font-[family-name:var(--font-cinzel)] text-[1.05rem] font-semibold tracking-[0.05em] ${
+                isActive ? "text-[#e8c547]" : "text-[#c5bba3]"
+              }`}
+            >
+              {item.label}
+              {isActive ? (
+                <span
+                  className="absolute inset-x-0 -bottom-0.5 h-[2px] rounded-full bg-[#d4af37]"
+                  aria-hidden
+                />
+              ) : null}
+            </Link>
+          );
+        })}
+      </nav>
     </header>
-  );
-}
-
-function NavIcon({ name, active }: { name: NavKey; active: boolean }) {
-  const stroke = active ? "#1a1205" : "#d4af37";
-  const common = {
-    width: 20,
-    height: 20,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke,
-    strokeWidth: 1.8,
-  } as const;
-
-  if (name === "games") {
-    return (
-      <svg {...common} aria-hidden>
-        <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z" />
-        <path d="M12 12 20 7.5M12 12v9M12 12 4 7.5" />
-      </svg>
-    );
-  }
-  if (name === "wallet") {
-    return (
-      <svg {...common} aria-hidden>
-        <rect x="3" y="6" width="18" height="13" rx="2" />
-        <path d="M3 10h18M16 14.5h2" />
-      </svg>
-    );
-  }
-  return (
-    <svg {...common} aria-hidden>
-      <rect x="3" y="6" width="18" height="13" rx="2" />
-      <path d="M7 6V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1M12 11v5M9.5 13.5 12 11l2.5 2.5" />
-    </svg>
   );
 }
 
 function EyeIcon({ open }: { open: boolean }) {
   if (open) {
     return (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        aria-hidden
+      >
         <path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z" />
         <circle cx="12" cy="12" r="2.5" />
       </svg>
     );
   }
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      aria-hidden
+    >
       <path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z" />
       <path d="m4 4 16 16" />
     </svg>

@@ -3,8 +3,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import type { PaymentRequestItem } from "@/store/api/paymentsApi";
-import { formatMmk, formatUsd } from "@/lib/money-format";
-import { useShowUsd } from "@/hooks/useShowUsd";
+import { formatMmk } from "@/lib/money-format";
 
 type Props = {
   balanceUsd: string;
@@ -48,10 +47,7 @@ export function WalletOverview({
   payments,
   loading,
 }: Props) {
-  const { showUsd } = useShowUsd();
-  const usd = formatUsd(balanceUsd);
   const mmk = formatMmk(balanceUsd, mmkPerUsd);
-  const rate = Number(mmkPerUsd || 0).toLocaleString("en-US");
 
   const pendingDeposits = payments.filter(
     (p) => p.type === "deposit" && p.status === "pending",
@@ -74,9 +70,6 @@ export function WalletOverview({
           <p className="text-[1.55rem] font-bold leading-tight text-[#e8c547] sm:text-[1.75rem]">
             {mmk} MMK
           </p>
-          {showUsd ? (
-            <p className="mt-1 text-[0.95rem] text-[#9a9280]">{usd} USD</p>
-          ) : null}
         </SummaryCard>
         <SummaryCard title="Pending Deposits">
           <p className="text-[1.55rem] font-bold leading-tight text-white sm:text-[1.75rem]">
@@ -106,19 +99,18 @@ export function WalletOverview({
                   <th className="px-3 py-2.5 font-bold">Type</th>
                   <th className="px-3 py-2.5 font-bold">Amount</th>
                   <th className="px-3 py-2.5 font-bold">Status</th>
-                  <th className="px-3 py-2.5 font-bold">Currency</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan={5} className="px-3 py-8 text-center text-[#9a9280]">
+                    <td colSpan={4} className="px-3 py-8 text-center text-[#9a9280]">
                       Loading…
                     </td>
                   </tr>
                 ) : rows.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="px-3 py-8 text-center text-[#9a9280]">
+                    <td colSpan={4} className="px-3 py-8 text-center text-[#9a9280]">
                       No transactions yet.
                     </td>
                   </tr>
@@ -135,7 +127,10 @@ export function WalletOverview({
                         </td>
                         <td className="px-3 py-3">{typeLabel(row.type)}</td>
                         <td className="px-3 py-3 whitespace-nowrap">
-                          {formatUsd(row.amountUsd)} USD
+                          {Number(row.amountMmk).toLocaleString("en-US", {
+                            maximumFractionDigits: 0,
+                          })}{" "}
+                          MMK
                         </td>
                         <td className="px-3 py-3">
                           <span
@@ -144,7 +139,6 @@ export function WalletOverview({
                             {st.text}
                           </span>
                         </td>
-                        <td className="px-3 py-3">MMK</td>
                       </tr>
                     );
                   })
@@ -176,9 +170,6 @@ export function WalletOverview({
               View History
             </Link>
           </div>
-          <p className="mt-auto pt-6 text-center text-[0.9rem] font-medium text-[#d4af37]">
-            1 USD = {rate} MMK
-          </p>
         </aside>
       </div>
     </div>

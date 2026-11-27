@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { formatMmk, formatUsd } from "@/lib/money-format";
+import { formatMmk } from "@/lib/money-format";
 
 export type WalletSideTab = "deposit" | "withdraw" | "history" | "transactions";
 
@@ -25,9 +25,7 @@ export function WalletSidebar({
   mmkPerUsd,
   onSelect,
 }: Props) {
-  const usd = formatUsd(balanceUsd);
   const mmk = formatMmk(balanceUsd, mmkPerUsd);
-  const rate = Number(mmkPerUsd || 0).toLocaleString("en-US");
 
   return (
     <aside className="flex w-full flex-col rounded-xl border border-[#d4af37]/40 bg-[#02150f] lg:w-[260px] lg:shrink-0">
@@ -40,13 +38,7 @@ export function WalletSidebar({
             TOTAL BALANCE
           </p>
           <p className="mt-1.5 text-[1.45rem] font-bold leading-none text-[#e8c547]">
-            USD {usd}
-          </p>
-          <p className="mt-2 text-[0.9rem] font-medium text-white">
-            MMK {mmk}
-          </p>
-          <p className="mt-1.5 text-[0.72rem] text-[#9a9280]">
-            1 USD = {rate} MMK
+            {mmk} MMK
           </p>
         </div>
       </div>

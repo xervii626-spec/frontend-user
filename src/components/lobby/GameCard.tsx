@@ -26,7 +26,7 @@ export function GameCard({ game, index, onPlay }: Props) {
     <button
       type="button"
       onClick={() => onPlay?.(game)}
-      className="group flex w-full flex-col overflow-hidden rounded-lg border border-[#d4af37]/55 bg-[#02150f] text-left transition hover:border-[#e8c547]"
+      className="group flex w-full flex-col overflow-hidden rounded-xl border border-[#d4af37]/50 bg-[#02150f] text-left shadow-[0_0_0_1px_rgba(212,175,55,0.06)] transition hover:border-[#e8c547] hover:shadow-[0_0_18px_rgba(212,175,55,0.18)]"
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         {game.imageUrl ? (
@@ -37,7 +37,10 @@ export function GameCard({ game, index, onPlay }: Props) {
             className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className={`absolute inset-0 bg-gradient-to-br ${gradient}`} aria-hidden />
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${gradient}`}
+            aria-hidden
+          />
         )}
 
         {game.isNew ? (
@@ -52,11 +55,11 @@ export function GameCard({ game, index, onPlay }: Props) {
         ) : null}
       </div>
 
-      <div className="border-t border-[#d4af37]/30 bg-[#02120d] px-2.5 py-2 sm:px-3 sm:py-2.5">
-        <p className="truncate text-center text-[0.9rem] font-bold leading-tight text-white sm:text-[0.95rem]">
+      <div className="border-t border-[#d4af37]/28 bg-[#02120d] px-2.5 py-2 sm:px-3 sm:py-2.5">
+        <p className="truncate text-center text-[0.9rem] font-bold leading-tight text-[#e8c547] sm:text-[0.95rem]">
           {game.title}
         </p>
-        <p className="mt-1 truncate text-center text-[0.75rem] font-medium leading-tight text-[#d4af37]">
+        <p className="mt-1 truncate text-center text-[0.72rem] font-medium leading-tight text-[#c5bba3]">
           {game.subtitle}
         </p>
       </div>

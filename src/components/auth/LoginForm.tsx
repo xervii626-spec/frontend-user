@@ -7,6 +7,7 @@ import { useGetPublicSettingsQuery } from "@/store/api/settingsApi";
 import { useAppDispatch } from "@/store/hooks";
 import { setCredentials } from "@/store/features/auth/authSlice";
 import { saveAuthSession } from "@/lib/auth-storage";
+import { saveDailyLoginPrompt } from "@/lib/daily-login-prompt";
 
 function parseApiError(err: unknown): string {
   if (!err || typeof err !== "object") return "Login failed. Please try again.";
@@ -88,6 +89,7 @@ export function LoginForm() {
         player,
         remember,
       });
+      saveDailyLoginPrompt(res.dailyLogin);
 
       router.replace("/games");
     } catch (err) {

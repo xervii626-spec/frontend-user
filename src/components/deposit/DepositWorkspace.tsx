@@ -21,6 +21,7 @@ import {
   isPendingPayment,
   statusPillClass,
 } from "@/lib/payment-format";
+import { formatMmk } from "@/lib/money-format";
 
 export type DepositMainTab = "deposit" | "withdraw" | "history";
 
@@ -224,7 +225,7 @@ export function DepositWorkspace({
                     Min: {DEPOSIT_MIN_MMK.toLocaleString("en-US")} MMK | Max:{" "}
                     {DEPOSIT_MAX_MMK.toLocaleString("en-US")} MMK
                     {tab === "withdraw"
-                      ? ` · Wallet ≈ $${Number(balanceUsd).toLocaleString("en-US", { maximumFractionDigits: 2 })} USD`
+                      ? ` · Wallet ≈ ${formatMmk(balanceUsd, mmkPerUsd)} MMK`
                       : ""}
                   </p>
                 </label>
@@ -411,11 +412,11 @@ function WithdrawInfoCard() {
           label="Amount Range"
           value={`${DEPOSIT_MIN_MMK.toLocaleString("en-US")} – ${DEPOSIT_MAX_MMK.toLocaleString("en-US")} MMK`}
         />
-        <InfoRow icon="wallet" label="Wallet check" value="USD balance required" />
+        <InfoRow icon="wallet" label="Wallet check" value="MMK balance required" />
       </ul>
       <p className="mt-4 text-[0.75rem] leading-relaxed text-[#9a9280]">
         Cashout = withdraw. Enter the name + phone for your KBZPay / Wave
-        account so cashier can send money. USD wallet is checked before submit.
+        account so cashier can send money. Balance is checked before submit.
       </p>
     </aside>
   );

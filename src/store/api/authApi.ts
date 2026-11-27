@@ -16,6 +16,18 @@ export type LoginResponse = {
     wallet?: unknown;
     createdAt?: string;
   };
+  dailyLogin?: {
+    kind: string;
+    claimDate: string;
+    timezone: string;
+    canClaim: boolean;
+    claimedToday: boolean;
+    amountUsd: string;
+    amountMmk: string;
+    mmkPerUsd: string;
+    playOnly: boolean;
+    claimedAt: string | null;
+  };
 };
 
 export type MeResponse = {

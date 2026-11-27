@@ -11,7 +11,7 @@ type Props = {
 
 export function GameGrid({ games, loading, onPlay }: Props) {
   const gridClass =
-    "grid w-full grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6";
+    "grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-3.5 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6";
 
   if (loading) {
     return (

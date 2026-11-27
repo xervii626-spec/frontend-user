@@ -30,7 +30,7 @@ export function SdLogo({
   return (
     <div className={`flex items-center gap-3.5 ${className}`}>
       <Image
-        src="/brand/sd-badge-v2.jpg"
+        src="/brand/sd-logo-circle.jpg"
         alt="Shwe Dunn"
         width={size}
         height={size}

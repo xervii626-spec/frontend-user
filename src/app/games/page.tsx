@@ -9,9 +9,11 @@ import {
   type LobbyCategory,
 } from "@/components/lobby/CategorySearchBar";
 import { GameGrid } from "@/components/lobby/GameGrid";
-import { DailyLoginClaimBox } from "@/components/lobby/DailyLoginClaimBox";
 import { QuestsClaimBox } from "@/components/lobby/QuestsClaimBox";
-import { BigWinTicker } from "@/components/lobby/BigWinTicker";
+import { AnnouncementBox } from "@/components/lobby/AnnouncementBox";
+import { AdsBanner } from "@/components/lobby/AdsBanner";
+import { DailyLoginClaimModal } from "@/components/lobby/DailyLoginClaimModal";
+import { FaqChatWidget } from "@/components/chat/FaqChatWidget";
 import { useLobbyLogout } from "@/hooks/useLobbyLogout";
 import { useMeQuery } from "@/store/api/authApi";
 import { useGetGamesQuery, type LobbyGame } from "@/store/api/gamesApi";
@@ -70,7 +72,7 @@ function LobbyPage() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#01100b] text-[#f5efe0]">
+    <div className="min-h-screen w-full bg-[radial-gradient(ellipse_at_50%_0%,#062218_0%,#01100b_42%,#010c08_100%)] text-[#f5efe0]">
       <LobbyHeader
         active="games"
         balanceUsd={me?.balance?.realBalance ?? "0"}
@@ -79,8 +81,8 @@ function LobbyPage() {
       />
 
       <main className="w-full px-3 pb-5 pt-4 sm:px-4 lg:px-5">
-        <BigWinTicker />
-        <DailyLoginClaimBox />
+        <AdsBanner />
+        <AnnouncementBox />
         <QuestsClaimBox />
 
         <CategorySearchBar
@@ -95,12 +97,7 @@ function LobbyPage() {
             Provider CMS returned 0 games for this partner. Showing preview
             lobby cards until games are enabled. Play launch is disabled.
           </div>
-        ) : (
-          <p className="mt-4 text-[0.8rem] text-[#9a9280]">
-            {filtered.length} games · click a card to launch (starts in Fun mode
-            when available)
-          </p>
-        )}
+        ) : null}
 
         <div className="mt-3">
           <GameGrid
@@ -110,6 +107,8 @@ function LobbyPage() {
           />
         </div>
       </main>
+      <FaqChatWidget />
+      <DailyLoginClaimModal />
     </div>
   );
 }
